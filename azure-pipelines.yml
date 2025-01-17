@@ -1,0 +1,14 @@
+trigger:
+  tags:
+    include:
+    - 0.*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:    
+- task: CmdLine@2
+  inputs:
+    script: |
+      docker login registry.aff.ng --username DockerShadow --password $(DOCKER_REGISTRY_PASSWORD)
+      bash deploy.sh

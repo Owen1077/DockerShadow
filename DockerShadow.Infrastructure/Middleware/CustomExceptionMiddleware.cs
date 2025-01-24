@@ -52,8 +52,10 @@ namespace DockerShadow.Infrastructure.Middleware
         {
             var code = HttpStatusCode.InternalServerError; // 500 if unexpected
 
-            logger.LogError(ex.Message, ex.InnerException);
-            logger.LogError(ex.StackTrace);
+            //logger.LogError("The following error occured:" + ex.Message, ex.InnerException);
+            //logger.LogError("The following stack trace:" + ex.StackTrace);
+            logger.LogError(ex, "An unhandled exception has occurred while executing the request.");
+
 
             var result = JsonConvert.SerializeObject(new Response<string>(ex.Message, (int)code));
             context.Response.ContentType = "application/json";
